@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /*http://blog.csdn.net/u013347241/article/details/51560290*/
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 300px;
+            border-radius: 10px; /*这个属性设置使填充进度条时的图形为圆角*/
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        /*给滑动轨道(track)添加样式*/
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 0px;
+            /*height: 15px;*/
+            /*border-radius: 10px; !*将轨道设为圆角的*!*/
+            /*box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; !*轨道内置阴影效果*!*/
+        }
+
+        ::-moz-range-track {
+            width: 0px;
+        }
+
+        ::-ms-track {
+            height: 76px;
+            width: 0px;
+        }
+
+        /*https://stackoverflow.com/questions/21527475/own-image-as-slider-thumb-on-range-how-to-style-on-css*/
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 50px;
+            height: 76px;
+            background-image: url('../images/saber.png');
+            margin-top: -60px; /*使滑块超出轨道部分的偏移量相等*/
+            position: relative;
+            z-index: 99;
+            /*background: #ffffff;*/
+            /*border-radius: 50%; !*外观设置为圆形*!*/
+            /*border: solid 0.125em rgba(205, 224, 230, 0.5); !*设置边框*!*/
+            /*box-shadow: 0 .125em .125em #3b4547; !*添加底部阴影*!*/
+        }
+
+        ::-moz-range-thumb {
+            background-image: url('../images/saber.png');
+            width: 50px;
+            height: 76px;
+            margin-top: -60px; /*使滑块超出轨道部分的偏移量相等*/
+            position: relative;
+            z-index: 99;
+        }
+
+        ::-ms-thumb {
+            background-image: url('../images/saber.png');
+            width: 50px;
+            height: 76px;
+            margin-top: -60px; /*使滑块超出轨道部分的偏移量相等*/
+            position: relative;
+            z-index: 99;
+        }
+    </style>
+    <script src="../js/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<div style="margin-left: 100px;margin-top: 50px">
+    <div>
+        <input type="range" name="slider" id="silder" ng-model="port" max="16" min="0" step="1"
+               style="width: 400px"/>
+    </div>
+    <canvas id="myDiv"
+            style="background-color: #2695e6;width: 400px;height: 20px;line-height: 20px;border-radius: 10px;text-align: center">
+    </canvas>
+    <div>
+        <div style="width: 400px;margin-top: 5px">
+            <span>0</span>
+            <span style="margin-left: 175px">8</span>
+            <span style="margin-left: 175px">16</span>
+        </div>
+    </div>
+</div>
+<span>{{port}}</span><br/>
+<!--<span>{{sliderValue}}</span><br/>-->
+<!--<button id="btn">run</button>-->
+<br/>
+<button ng-click="btnMin()" style="background-image: url('../images/saber.png');width: 50px;height: 76px">minus</button>
+<button ng-click="btnAdd()" style="background-image: url('../images/saber.png');width: 50px;height: 76px">add</button>
+</body>
+</html>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.port = 16;
+        $scope.maxPortNum = $scope.port;
+        $scope.prePort = 0;
+//        $scope.sliderValue = 1;
+        $scope.btnMin = function () {
+            if ($scope.port > 0) {
+                $scope.prePort = $scope.port;
+                $scope.port = $scope.port - 1;
+                $scope.updateBar()
+            }
+        };
+
+        $scope.btnAdd = function () {
+            if ($scope.port < $scope.maxPortNum) {
+                $scope.prePort = $scope.port;
+                $scope.port = $scope.port + 1;
+                $scope.updateBar()
+            }
+        };
+
+        $scope.updateBar = function () {
+            var targetValue = $scope.port / $scope.maxPortNum * 400;
+            cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(function fn() {
+                    if (parseInt($scope.port) - $scope.prePort > 0) {
+                        if (parseInt(myDiv.style.width) < parseInt(targetValue)) {
+                            myDiv.style.width = parseInt(myDiv.style.width) + 4 + 'px';
+//                            $scope.sliderValue = $scope.port / $scope.maxPortNum * 100;
+                        }
+                    } else {
+                        if (parseInt(myDiv.style.width) > parseInt(targetValue)) {
+                            myDiv.style.width = parseInt(myDiv.style.width) - 4 + 'px';
+//                            $scope.sliderValue = $scope.port / $scope.maxPortNum * 100;
+                        }
+                    }
+                    timer = requestAnimationFrame(fn);
+                }
+            );
+
+
+        }
+        var canvas = document.getElementById("myDiv");
+        var context = canvas.getContext("2d");
+        var slider = document.getElementById("silder");
+        slider.onmousedown = function () {
+            var scale = document.getElementById("silder").value;
+            $scope.updateBarBySlider(scale);
+        }
+        slider.onmousemove = function () {
+            var scale = document.getElementById("silder").value;
+            $scope.updateBarBySlider(scale);
+        }
+
+
+        $scope.updateBarBySlider = function (scale) {
+            $scope.port = parseInt(scale);
+            myDiv.style.width = (parseFloat($scope.port) / parseFloat($scope.maxPortNum)) * 400 + 'px';
+        }
+    })
+    ;
+    var timer;
+
+</script>
