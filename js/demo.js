@@ -8,32 +8,32 @@ angular.module('MyApp', ['ngMaterial', 'ngMdIcons', 'ngTableTree'])
                 name: 'saber',
                 peiYin: '川澄绫子',
                 height: '154cm',
-                weight: '42kg'
+                weight: '42'
             }, {
                 imgId: 'kilizi',
                 name: '卫宫切嗣',
                 peiYin: '小山力也 ',
                 height: '175cm',
-                weight: '67kg',
+                weight: '67',
                 children: [{
                     imgId: 'yiliya',
                     name: '依莉雅',
                     peiYin: '门胁舞以',
                     height: '133cm',
-                    weight: '29kg'
+                    weight: '29'
                 }, {
                     imgId: 'shiro',
                     name: '卫宫士郎',
                     peiYin: '杉山纪彰',
                     height: '167cm',
-                    weight: '58kg'
+                    weight: '58'
                 }]
             }, {
                 imgId: 'qili',
                 name: '言峰绮礼',
                 peiYin: '中田让治',
                 height: '185cm',
-                weight: '82kg'
+                weight: '82'
             }]
         }, {
             imgId: 'ubw',
@@ -43,21 +43,23 @@ angular.module('MyApp', ['ngMaterial', 'ngMdIcons', 'ngTableTree'])
                 name: '卫宫士郎',
                 peiYin: '杉山纪彰',
                 height: '167cm',
-                weight: '58kg'
+                weight: '58'
             }, {
                 imgId: 'lin',
                 name: '远返凛',
                 peiYin: '植田佳奈',
                 height: '159cm',
-                weight: '124cm'
+                weight: '47'
             }, {
                 imgId: 'saber',
                 name: 'saber',
                 peiYin: '川澄绫子',
                 height: '154cm',
-                weight: '42kg'
+                weight: '42'
             }]
         }];
+
+
 
         // $scope.tree2 = angular.copy($scope.tree);
 

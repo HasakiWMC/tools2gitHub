@@ -4,7 +4,7 @@
 <head>
     <title>ngTableTree</title>
     <meta charset="utf-8">
-    
+
     <link rel="stylesheet" type="text/css" href="http://7xlphe.com1.z0.glb.clouddn.com/angular-material.min-1.1.1.css">
     <link rel="stylesheet" type="text/css" href="../css/tabletree.css">
     <link rel="stylesheet" type="text/css" href="../css/demo.css">
@@ -17,31 +17,37 @@
     <table table-tree="tree" init-expand="true" expand-indent="50" max-rows="15" deep-watch="true" style="border: 0">
         <thead style="border: 0">
         <tr style="border: 0">
-            <th style="width: 240px;border: 0">名字</th>
-            <th style="width: 240px;border: 0">配音</th>
-            <th style="width: 240px;border: 0">身高</th>
-            <th style="width: 240px;border: 0">体重</th>
+            <th style="width:25%;border: 0">名字</th>
+            <th style="width:15%;border: 0">配音</th>
+            <th style="width:15%;border: 0">身高</th>
+            <th style="width:45%;border: 0">体重</th>
             <!--<th style="border: 0"></th>-->
             <!--<th style="border: 0"></th>-->
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td style="border: 0"><img src="../images/{{tree.imgId}}.png" width="30px" ng-show="tree.imgId != ''">{{ tree.name }}</td>
+            <td style="border: 0"><img src="../images/{{tree.imgId}}.png" width="30px" ng-show="tree.imgId != ''">{{
+                tree.name }}
+            </td>
             <td style="border: 0">{{ tree.peiYin }}</td>
             <td style="border: 0">{{ tree.height }}</td>
             <td style="border: 0">
                 {{ tree.weight }}
+                <canvas id="myDiv{{tree.name}}" ng-show="tree.weight"
+                        style="background-color: #2695e6;height: 20px;line-height: 20px;border-radius: 10px;text-align: center"
+                        width="{{tree.weight*40}}px">
+                </canvas>
                 <!--<ng-md-icon icon="info" style="fill: #ccc; vertical-align: middle;" size="16">-->
-                    <!--<md-tooltip>please contact me with {{ tree.height }}</md-tooltip>-->
+                <!--<md-tooltip>please contact me with {{ tree.height }}</md-tooltip>-->
                 <!--</ng-md-icon>-->
             </td>
             <!--<td style="border: 0">-->
-                <!--<md-button class="md-primary md-raised" ng-click="addAge($event, **)">Add Age</md-button>-->
-                <!--<md-button class="md-primary md-raised" ng-click="insertRow($event, **)">Insert Row</md-button>-->
+            <!--<md-button class="md-primary md-raised" ng-click="addAge($event, **)">Add Age</md-button>-->
+            <!--<md-button class="md-primary md-raised" ng-click="insertRow($event, **)">Insert Row</md-button>-->
             <!--</td>-->
             <!--<td style="border: 0">-->
-                <!--<md-button class="md-primary md-raised" ng-click="insertRow($event, **)">Insert Row</md-button>-->
+            <!--<md-button class="md-primary md-raised" ng-click="insertRow($event, **)">Insert Row</md-button>-->
             <!--</td>-->
         </tr>
         </tbody>
@@ -49,35 +55,35 @@
 
     <!--<h3 style="margin-top: 30px;">init-expand: false, expand-indent: 20px, deep-watch: false</h3>-->
     <!--<table table-tree="tree2" init-expand="false" expand-indent="20" deep-watch="false">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>Name</th>-->
-            <!--<th>Age</th>-->
-            <!--<th>Address</th>-->
-            <!--<th>Contact</th>-->
-            <!--<th></th>-->
-            <!--<th></th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr>-->
-            <!--<td>{{ **.name }}</td>-->
-            <!--<td>{{ **.age }}</td>-->
-            <!--<td>{{ **.address }}</td>-->
-            <!--<td>-->
-                <!--{{ **.contact }}-->
-                <!--<ng-md-icon icon="info" style="fill: #ccc; vertical-align: middle;" size="16">-->
-                    <!--<md-tooltip>please contact me with {{ **.contact }}</md-tooltip>-->
-                <!--</ng-md-icon>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<md-button class="md-primary md-raised" ng-click="addAge($event, **)">Add Age</md-button>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<md-button class="md-primary md-raised" ng-click="insertRow2($event, **)">Insert Row</md-button>-->
-            <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th>Name</th>-->
+    <!--<th>Age</th>-->
+    <!--<th>Address</th>-->
+    <!--<th>Contact</th>-->
+    <!--<th></th>-->
+    <!--<th></th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr>-->
+    <!--<td>{{ **.name }}</td>-->
+    <!--<td>{{ **.age }}</td>-->
+    <!--<td>{{ **.address }}</td>-->
+    <!--<td>-->
+    <!--{{ **.contact }}-->
+    <!--<ng-md-icon icon="info" style="fill: #ccc; vertical-align: middle;" size="16">-->
+    <!--<md-tooltip>please contact me with {{ **.contact }}</md-tooltip>-->
+    <!--</ng-md-icon>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<md-button class="md-primary md-raised" ng-click="addAge($event, **)">Add Age</md-button>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<md-button class="md-primary md-raised" ng-click="insertRow2($event, **)">Insert Row</md-button>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
     <!--</table>-->
 </div>
 <script type="text/javascript" src="http://7xlphe.com1.z0.glb.clouddn.com/angular.min-1.5.8.js"></script>
