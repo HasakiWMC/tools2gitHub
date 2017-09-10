@@ -33,11 +33,12 @@
             <td style="border: 0">{{ tree.peiYin }}</td>
             <td style="border: 0">{{ tree.height }}</td>
             <td style="border: 0">
-                {{ tree.weight }}kg
+
                 <canvas id="myDiv{{tree.name}}" ng-show="tree.weight"
                         style="background-color: #2695e6;height: 20px;line-height: 20px;border-radius: 10px;text-align: center"
                         width="{{tree.weight*40}}px">
                 </canvas>
+                <span ng-show="tree.weight">{{ tree.weight }}kg</span>
                 <!--<ng-md-icon icon="info" style="fill: #ccc; vertical-align: middle;" size="16">-->
                 <!--<md-tooltip>please contact me with {{ tree.height }}</md-tooltip>-->
                 <!--</ng-md-icon>-->
